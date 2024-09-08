@@ -1,27 +1,60 @@
 
 -- Ejercicio 1:  Selecciona el nombre de todos los álbumes y ordénalos alfabéticamente.
-
+SELECT "Title" 
+FROM "Album"
+ORDER BY "Title";
 
 -- Ejercicio 2:  Encuentra el álbum con el mayor número de canciones.
-
+SELECT "Title" AS "Album_Name"
+FROM "Album"
+WHERE "AlbumId" = (
+  SELECT "AlbumId"
+  FROM "Track"
+  GROUP BY "AlbumId"
+  ORDER BY COUNT(*) DESC
+  LIMIT 1
+);
 
 -- Ejercicio 3:  Calcula la duración promedio, desviación estándar y varianza por compositor.
+SELECT 
+  "Composer" AS "Compositor", 
+  AVG("Milliseconds") / 60000 AS "Duracion_Media",
+  STDDEV("Milliseconds")  AS "Desviacion_Estandar_Duracion", 
+  VARIANCE("Milliseconds")  AS "Varianza_Duracion"
+FROM "Track"
+WHERE "Composer" IS NOT NULL
+GROUP BY "Composer"
+ORDER BY "Composer";
 
 
 -- Ejercicio 4: Selecciona el título y el precio de las pistas, y limita los resultados a 10.
-
-   
+SELECT "Name", "UnitPrice" 
+FROM "Track"
+LIMIT 10;
 
 -- Ejercicio 5: Lista los nombres de los empleados y ordénalos por el ID del empleado en orden descendente.
-
+SELECT 
+	"EmployeeId",
+	"FirstName",
+	"LastName"
+FROM "Employee" 
+ORDER BY "EmployeeId" DESC;
 
 -- Ejercicio 6:  Muestra el número de géneros distintos disponibles en la base de datos.
+SELECT count(*) AS "Total_Genres"
+FROM "Genre" 
 
 -- Ejercicio 7: Selecciona el nombre del cliente y el país, limitando los resultados a 5, y ordena por el nombre del cliente.
-
+SELECT "FirstName" , "Country" 
+FROM "Customer"
+ORDER BY "FirstName" 
+limit(5);
     
 -- Ejercicio 8: Muestra la cantidad total de clientes agrupados por país.
-
+SELECT "Country", count(*) 
+FROM "Customer"
+GROUP BY "Country" 
+ORDER BY count(*) DESC; 
 
 -- Ejercicio 9: Obtén el total de importes de facturas para cada país y muestra solo aquellos con un total superior a 10,000.
 
