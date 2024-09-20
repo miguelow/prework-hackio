@@ -26,7 +26,6 @@ WHERE "Composer" IS NOT NULL
 GROUP BY "Composer"
 ORDER BY "Composer";
 
-
 -- Ejercicio 4: Selecciona el título y el precio de las pistas, y limita los resultados a 10.
 SELECT "Name", "UnitPrice" 
 FROM "Track"

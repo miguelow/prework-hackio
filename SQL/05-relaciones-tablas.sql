@@ -9,14 +9,18 @@ INNER JOIN "Album" AS a
 ORDER BY "Album_Title", "Track_Name";
  
 -- Ejercicio 2: Lista los nombres de los artistas y los títulos de sus álbumes. Ordena los resultados por artista.
-SELECT t."Composer", a."Title" AS "Album_Title"
+SELECT 
+	t."Composer", a."Title" AS "Album_Title"
 FROM "Track" AS t
 INNER JOIN "Album" AS a
 	ON t."AlbumId" = a."AlbumId" 
 ORDER BY t."Composer" , a."Title" 
 
 -- Ejercicio 3: Encuentra los nombres de los clientes y los totales de sus facturas. Extrae solo los 5 clientes con mayor total. 
-SELECT c."FirstName", c."LastName", sum(i."Total") AS "Invoice_Total" 
+SELECT 
+	c."FirstName", 
+	c."LastName", 
+	sum(i."Total") AS "Invoice_Total" 
 FROM "Customer" AS c
 INNER JOIN "Invoice" AS i
 	ON c."CustomerId" = i."CustomerId" 
@@ -25,8 +29,9 @@ ORDER BY "Invoice_Total" DESC
 LIMIT 5;
 
 -- Ejercicio 4: Lista los nombres de los empleados y los nombres de los clientes que les han sido asignados.
-SELECT CONCAT(e."LastName", ' ' ,e."LastName") AS nombre_empleado, 
-       COUNT(CONCAT(c."FirstName", ' ', c."LastName")) AS numero_clientes
+SELECT 
+	CONCAT(e."LastName", ' ' , e."LastName") AS nombre_empleado, 
+    COUNT(CONCAT(c."FirstName", ' ', c."LastName")) AS numero_clientes
 FROM "Customer" AS c 
 INNER JOIN "Employee" AS e 
 	ON c."SupportRepId" = e."EmployeeId"
@@ -96,7 +101,9 @@ LEFT JOIN "Artist" AS a2
 ORDER BY a2."Name", a."Title"; 
 
 -- Ejercicio 11: Cuenta cuántas pistas hay en cada género. Ordena los generos en función del número de canciones de mayor a menor. 
-SELECT g."Name" AS "Genre_Name", COUNT(t."TrackId") AS "Total_Tracks"
+SELECT 
+	g."Name" AS "Genre_Name", 
+	COUNT(t."TrackId") AS "Total_Tracks"
 FROM "Track" AS t
 INNER JOIN "Genre" AS g 
 	ON t."GenreId" = g."GenreId"
@@ -104,7 +111,9 @@ GROUP BY g."GenreId", g."Name"
 ORDER BY "Total_Tracks" DESC;
 
 --  Ejercicio 12: Muestra los títulos de los álbumes y la duración total de todas las pistas en cada álbum.
-SELECT a."Title" AS "Album_name", SUM(t."Milliseconds") AS "Total_Album_Duration"
+SELECT 
+	a."Title" AS "Album_name", 
+	SUM(t."Milliseconds") AS "Total_Album_Duration"
 FROM "Album" AS a 
 INNER JOIN "Track" AS t
 	ON a."AlbumId" = t."AlbumId" 
@@ -112,7 +121,9 @@ GROUP BY a."Title"
 ORDER BY "Total_Album_Duration" DESC;
 
 -- Ejercicio 14: Encuentra los nombres de los clientes y el total gastado por cada uno.
-SELECT concat(c."FirstName", ' ', c."LastName") AS "Full_Name" , SUM(i."Total") AS "Total_Spent"
+SELECT 
+	concat(c."FirstName", ' ', c."LastName") AS "Full_Name" , 
+	SUM(i."Total") AS "Total_Spent"
 FROM "Customer" AS c
 INNER JOIN "Invoice" AS i 
 	ON c."CustomerId" = i."CustomerId"
