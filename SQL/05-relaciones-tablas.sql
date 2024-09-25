@@ -10,7 +10,8 @@ ORDER BY "Album_Title", "Track_Name";
  
 -- Ejercicio 2: Lista los nombres de los artistas y los títulos de sus álbumes. Ordena los resultados por artista.
 SELECT 
-	t."Composer", a."Title" AS "Album_Title"
+	t."Composer", 
+	a."Title" AS "Album_Title"
 FROM "Track" AS t
 INNER JOIN "Album" AS a
 	ON t."AlbumId" = a."AlbumId" 
